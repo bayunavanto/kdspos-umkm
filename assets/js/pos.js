@@ -13,11 +13,16 @@ import {
   serverTimestamp,
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
+import { requireRole } from "./auth-guard.js";
+await requireRole(["cashier"]);
+
 const logoutBtn = document.getElementById("logoutBtn");
 
 const sendOrderBtn = document.getElementById("sendOrder");
 
 const nextQueue = document.getElementById("nextQueue");
+
+const remainingQueue = document.getElementById("remainingQueue");
 
 let orderType = "dine_in";
 
@@ -76,31 +81,53 @@ function getTodayDate() {
 ====================== */
 
 async function loadNextQueue() {
-  try {
-    const todayDate = getTodayDate();
+  const todayDate = getTodayDate();
 
-    const q = query(
-      collection(db, "orders"),
-      where("queueDate", "==", todayDate),
-      orderBy("queueNumber", "desc"),
-      limit(1),
-    );
+  /* ======================
+     LAST QUEUE NUMBER
+  ====================== */
 
-    const snapshot = await getDocs(q);
+  const lastQueueQuery = query(
+    collection(db, "orders"),
+    where("queueDate", "==", todayDate),
+    orderBy("queueNumber", "desc"),
+    limit(1),
+  );
 
-    let nextNumber = 1;
+  const lastQueueSnap = await getDocs(lastQueueQuery);
 
-    if (!snapshot.empty) {
-      const lastOrder = snapshot.docs[0].data();
+  let nextNumber = 1;
 
-      nextNumber = lastOrder.queueNumber + 1;
-    }
+  if (!lastQueueSnap.empty) {
+    const lastOrder = lastQueueSnap.docs[0].data();
 
-    nextQueue.innerText = `#${nextNumber}`;
-  } catch (error) {
-    console.error(error);
+    nextNumber = lastOrder.queueNumber + 1;
+  }
 
-    nextQueue.innerText = "#?";
+  /* ======================
+     ACTIVE + PENDING COUNT
+  ====================== */
+
+  const processQuery = query(
+    collection(db, "orders"),
+    where("queueDate", "==", todayDate),
+    where("status", "in", ["active", "pending"]),
+  );
+
+  const processSnap = await getDocs(processQuery);
+
+  const totalProcess = processSnap.size;
+
+  /* ======================
+     UI UPDATE
+  ====================== */
+
+  nextQueue.innerText = `#${nextNumber}`;
+
+  if (totalProcess <= 0) {
+    remainingQueue.innerText = "Tidak ada antrean";
+  } else {
+    remainingQueue.innerText = `${totalProcess} pesanan sedang diproses`;
   }
 }
 

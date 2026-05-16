@@ -2,6 +2,8 @@ import { db, auth } from "./firebase.js";
 
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
+import { signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
 import {
   collection,
   query,
@@ -12,6 +14,9 @@ import {
   updateDoc,
   serverTimestamp,
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+import { requireRole } from "./auth-guard.js";
+await requireRole(["kitchen"]);
 
 /* ======================
    UTIL
@@ -50,6 +55,31 @@ onAuthStateChanged(auth, (user) => {
   }
 
   initKDS();
+});
+
+/* ======================
+   LOGOUT
+====================== */
+
+logoutBtn.addEventListener("click", async () => {
+  const result = await Swal.fire({
+    title: "Logout?",
+    text: "Sesi login akan diakhiri",
+    icon: "warning",
+
+    showCancelButton: true,
+
+    confirmButtonText: "Ya, Logout",
+    cancelButtonText: "Batal",
+
+    reverseButtons: true,
+  });
+
+  if (result.isConfirmed) {
+    await signOut(auth);
+
+    window.location.href = "index.html";
+  }
 });
 
 /* ======================
