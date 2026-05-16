@@ -1,0 +1,2 @@
+email : admin@kdspos.local
+pass : aadmin@123

@@ -1,0 +1,159 @@
+body {
+  background: #f5f7fb;
+  font-family: Arial, sans-serif;
+}
+
+/* LOGIN */
+.login-wrapper {
+  min-height: 100vh;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 420px;
+
+  border: none;
+  border-radius: 20px;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.login-title {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.login-subtitle {
+  color: #777;
+  margin-bottom: 30px;
+}
+
+/* BUTTON */
+.btn-main {
+  background: #0d6efd;
+  border: none;
+  border-radius: 12px;
+
+  padding: 12px;
+  font-weight: 600;
+}
+
+.btn-main:hover {
+  background: #0b5ed7;
+}
+
+/* INPUT */
+.form-control {
+  border-radius: 12px;
+  padding: 12px;
+}
+
+/* POS */
+.container-pos {
+  max-width: 700px;
+  margin: auto;
+  padding-top: 30px;
+}
+
+.queue-preview {
+  background: white;
+  padding: 15px;
+
+  border-radius: 15px;
+
+  margin-bottom: 20px;
+
+  font-size: 20px;
+  font-weight: bold;
+
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* ======================
+   POS
+====================== */
+
+.container-pos {
+  max-width: 700px;
+  padding-top: 30px;
+  padding-bottom: 50px;
+}
+
+.pos-title {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 0;
+}
+
+.pos-subtitle {
+  color: #777;
+  margin-bottom: 0;
+}
+
+.pos-card {
+  border: none;
+  border-radius: 20px;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.queue-preview {
+  background: white;
+
+  padding: 20px;
+
+  border-radius: 20px;
+
+  margin-bottom: 20px;
+
+  text-align: center;
+
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.queue-number {
+  font-size: 42px;
+  font-weight: bold;
+
+  color: #0d6efd;
+}
+
+.textarea-order {
+  min-height: 180px;
+
+  resize: none;
+}
+
+.form-label {
+  font-weight: 600;
+}
+
+.order-type.active {
+  background: #0d6efd;
+  color: white;
+}
+
+.order-btn {
+  flex: 1;
+  padding: 12px;
+
+  border: 1px solid #0d6efd;
+  background: white;
+
+  color: #0d6efd;
+
+  border-radius: 10px;
+
+  font-weight: 600;
+
+  transition: 0.15s;
+}
+
+.order-btn.active {
+  background: #0d6efd;
+  color: white;
+}
+
+.order-btn:active {
+  transform: scale(0.98);
+}

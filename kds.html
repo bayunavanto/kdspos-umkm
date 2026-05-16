@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KDS UMKM</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        background: #111;
+        color: white;
+      }
+
+      .kds-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      /* LANDSCAPE */
+      @media (min-width: 768px) {
+        .kds-container {
+          grid-template-columns: 2fr 1fr;
+        }
+      }
+
+      .panel {
+        background: #1c1c1c;
+        border-radius: 12px;
+        padding: 15px;
+        height: 100vh;
+        overflow-y: auto;
+      }
+
+      .active-order {
+        border-left: 6px solid #0d6efd;
+        padding: 15px;
+        border-radius: 10px;
+        background: #e7eeee;
+        color: #000;
+      }
+
+      .queue-item {
+        background: #2a2a2a;
+        padding: 10px;
+        border-radius: 8px;
+        margin-bottom: 8px;
+      }
+
+      .queue-number {
+        color: #0d6efd;
+        font-weight: bold;
+      }
+
+      .order-text {
+        white-space: pre-line;
+        font-size: 14px;
+      }
+
+      /* QUEUE NUMBER */
+      .active-order .fs-4 {
+        font-size: 38px !important;
+        font-weight: 800;
+      }
+
+      /* CUSTOMER NAME */
+      .active-order .fw-bold {
+        font-size: 22px;
+      }
+
+      /* ORDER TEXT */
+      .active-order .order-text {
+        font-size: 18px;
+        line-height: 1.4;
+      }
+
+      /* ORDER TYPE BADGE */
+      .active-order .badge {
+        font-size: 14px;
+        padding: 6px 10px;
+      }
+
+      .active-order .customer-name {
+        font-size: 32px;
+        /* font-weight: 800; */
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container-fluid p-2">
+      <h5 class="mb-3">🔥 KDS Dapur</h5>
+
+      <div class="kds-container">
+        <!-- ACTIVE -->
+        <div class="panel">
+          <h6>ACTIVE ORDER</h6>
+          <div id="activeOrder">
+            <p class="text-withe">Tidak ada order aktif</p>
+          </div>
+        </div>
+
+        <!-- QUEUE -->
+        <div class="panel">
+          <h6>QUEUE</h6>
+          <div id="queueList"></div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module" src="assets/js/kds.js"></script>
+  </body>
+</html>
